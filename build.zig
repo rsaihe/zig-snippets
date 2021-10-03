@@ -12,8 +12,8 @@ pub fn build(b: *std.build.Builder) !void {
     const mode = b.standardReleaseOptions();
 
     const dir = try std.fs.cwd().openDir("src", .{ .iterate = true });
-    var iter = dir.iterate();
-    while (try iter.next()) |entry| {
+    var it = dir.iterate();
+    while (try it.next()) |entry| {
         if (entry.kind == .File) {
             const name = std.mem.sliceTo(entry.name, '.');
             const filename = try std.fmt.allocPrint(b.allocator, "src/{s}", .{entry.name});
