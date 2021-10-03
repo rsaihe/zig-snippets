@@ -16,7 +16,11 @@ pub fn build(b: *std.build.Builder) !void {
     while (try it.next()) |entry| {
         if (entry.kind == .File) {
             const name = std.mem.sliceTo(entry.name, '.');
-            const filename = try std.fmt.allocPrint(b.allocator, "src/{s}", .{entry.name});
+            const filename = try std.fmt.allocPrint(
+                b.allocator,
+                "src/{s}",
+                .{entry.name},
+            );
 
             const exe = b.addExecutable(name, filename);
             exe.setTarget(target);
